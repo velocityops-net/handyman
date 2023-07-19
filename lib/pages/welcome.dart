@@ -1,6 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:handyman_app/assets/strings.dart';
 import '/component/custom_button.dart';
+import 'package:openid_client/openid_client.dart';
+import '/openidauth/openid_io.dart';
+
+Uri uri = Uri.parse('https://dev-mgtjqj8sx80yy610.us.auth0.com');
+const clientId = 'dLKrIIlEBdtagoOjuNuVyMjBZE8KHW19';
+const scopes = ['profile'];
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -31,11 +39,16 @@ class WelcomePage extends StatelessWidget {
               Container(
                   margin: const EdgeInsets.only(top: 100),
                   child: CustomButton(
-                    buttonText: Strings.signupText,
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/page2');
-                    },
-                  )),
+                      buttonText: Strings.signupText,
+                      onPressed: () async {
+                        // create the client
+                        var issuer = await Issuer.discover(uri);
+                        var client = Client(issuer, clientId);
+                        var credential =
+                            await authenticate(client, scopes: scopes);
+                        var userInfo = await credential.getUserInfo();
+                        log("message", error: userInfo);
+                      })),
               Container(
                 margin: const EdgeInsets.only(top: 20),
                 child: TextButton(

@@ -18,18 +18,6 @@ class MyApp extends StatelessWidget {
       ),
       onGenerateRoute: RouteGenerator.generateRoute,
       initialRoute: '/page1',
-      // title: 'Flutter Demo',
-      // theme: ThemeData(
-      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      //   useMaterial3: true,
-      // ),
-      // initialRoute: '/',
-      // routes: {
-      //   // When navigating to the "/" route, build the HomeScreen widget.
-      //   '/': (context) => const WelcomePage(),
-      //   // When navigating to the "/second" route, build the SecondScreen widget.
-      //   '/second': (context) => const CreateAccountPage(),
-      // },
     );
   }
 }
